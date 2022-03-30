@@ -1,0 +1,56 @@
+
+create database example;
+use example;
+create table addresses(
+id int,
+house_no int,
+city varchar(20),
+postalcode varchar(6)
+);
+/*adding primary key and delete it*/
+alter table addresses
+add primary key(id);
+describe addresses;
+alter table addresses
+drop primary key;
+describe addresses;
+
+create table people(
+id int,
+first_name varchar(20),
+last_name varchar(20),
+address_id int
+);
+alter table people
+add primary key(id);
+describe people;
+
+create table pets(
+id int,
+name varchar(20),
+species varchar(20),
+owner_id int
+);
+
+/*added unique constraint*/
+describe pets;
+alter table pets add constraint u_species unique (species);
+
+ 
+/* see the properties*/
+show create table people;
+/* added and deleted foreign keys*/
+alter table people add constraint fathima 
+ foreign key(address_id) references addresses(id);
+describe people;
+alter table people drop foreign key fathima;
+/* changed the column_name of a particular table*/
+
+describe pets;
+select * from pets;
+alter table pets change`species` `animalname` varchar(20);
+describe pets;
+/* changed datatype of a column*/
+alter table addresses modify city varchar(30);
+describe addresses;
+
