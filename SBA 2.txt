@@ -1,0 +1,176 @@
+1.Create an arraylist of user-defined data type Book. it should have:-
+i)Name of the Book
+ii)Author of the book
+iii)year of publication of the book
+iV)number of copies sold.
+sort the array list based on the year of publication.
+package day12assignment;
+import java.util.*;
+class Book implements Comparable<Book>{
+	String name;
+	String author;
+	Integer  year;
+	int copies;
+	public Book(String name,String author,Integer year,int copies) {
+		this.name=name;
+		this.author=author;
+		this.year=year;
+		this.copies=copies;
+	}
+	public int getYear() {
+		return this.year;
+	}
+	@Override
+	public int compareTo(Book o) {
+		// sort based on year
+		return this. year.compareTo(o.year);
+	}
+}
+
+public class BookArrayList {
+
+	public static void main(String[] args) {
+		ArrayList<Book> list=new ArrayList<Book>();
+		Book b1=new Book("fundamentals of physics","sreelal",1999,250);
+		Book b2=new Book("biology","jayalalitha",2000,350);
+		Book b3=new Book("fundamentals of chemistry","lolan",1960,487);
+		list.add(b1);
+		list.add(b2);
+		list.add(b3);
+		Collections.sort(list);
+		for(Book b:list) {
+			System.out.println(b.name+" "+b.author+" "+b.year+" "+b.copies);
+		}
+
+	}
+
+}
+OUTPUT:
+fundamentals of chemistry lolan 1960 487
+fundamentals of physics sreelal 1999 250
+biology jayalalitha 2000 350
+
+2.Write a program to create, write and read from a file.
+package day14assignment;
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class FileCreateWriteRead {
+
+	public static void main(String[] args) throws IOException  {
+		File f0=new File("C:FileSample.txt");
+		if(f0.createNewFile()) {
+			System.out.println("a new file named "+f0.getName()+" has been ceated");
+		}
+		else {
+			System.out.println("file already exists");
+		}
+		FileWriter obj1=new FileWriter("C:FileSample.txt");
+		obj1.write("I am writing to this file from progam...." );
+		obj1.write("welcome to ooty!nice to meet you");
+		obj1.close();
+		Scanner sc=new Scanner(f0);
+		while(sc.hasNextLine()) {
+			String filedata=sc.nextLine();
+			System.out.println(filedata);
+		}
+		sc.close();
+	}
+}
+OUTPUT:
+file already exists
+I am writing to this file from progam....welcome to ooty!nice to meet you
+
+3.Write a program to get the information about the file.
+package day14assignment;
+import java.io.File;
+public class FileGetInformation {
+
+	public static void main(String[] args) {
+		File f1=new File("C:FileSample.txt");
+		if(f1.exists()) {
+			System.out.println("filename is ....."+f1.getName());
+			System.out.println("absolute path of file is...."+f1.getAbsolutePath());
+			System.out.println("Is file writable..."+f1.canWrite());
+			System.out.println("Is file readable...."+f1.canRead());
+			System.out.println("Is file executable...."+f1.canExecute());
+			System.out.println("length of file in bytes..."+f1.length());
+			
+		}
+
+	}
+
+}
+OUTPUT:
+filename is .....FileSample.txt
+absolute path of file is....C:\JAVA WORKSPACE\JAVA NEW TRAINING\FileSample.txt
+Is file writable...true
+Is file readable....true
+Is file executable....true
+length of file in bytes...73
+
+4.Write a program Implement the filereader until the file ending character is “-
+1” and print all the data of the file.
+
+package day14;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class FileReaderAssignment {
+
+	public static void main(String[] args)throws IOException{
+		FileReader f1=new FileReader("C:FileSample1.txt");
+		int i;
+		while((i=f1.read())!=-1) {
+			System.out.println((char)i);
+		}
+		f1.close();
+	}
+}
+OUTPUT:
+i
+ 
+a
+m
+ 
+w
+r
+i
+t
+i
+n
+g
+ 
+t
+h
+i
+s
+ 
+f
+o
+r
+ 
+b
+e
+t
+t
+e
+r
+ 
+u
+n
+d
+e
+r
+s
+t
+a
+n
+d
+i
+n
+g
+				
