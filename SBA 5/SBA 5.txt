@@ -1,0 +1,134 @@
+1. Create Database project_movie_data and deploy table data according to ER diagram.
+
+create database project_movie_data;
+use project_movie_data;
+OUTPUT:
+17:29:14	use project_movie_data	0 row(s) affected	0.000 sec
+
+2. Create 9 tables which are presented in ER model and load the data with their foreign key
+and primary key values.
+
+create table actor(
+act_id int primary key auto_increment,
+act_fname varchar(45),
+act_lname varchar(45),
+act_gender enum('M','F')
+)auto_increment=101;
+
+create table director(
+dir_id int primary key auto_increment,
+dir_fname varchar(45),
+dir_lname varchar(45)
+)auto_increment=201;
+select * from director;
+create table movie_direction(
+dir_id int not null,
+mov_id int not null,
+foreign key(dir_id) references director(dir_id),
+foreign key(mov_id) references movie(mov_id)
+);
+create table movie_cast(
+act_id int not null,
+mov_id int not null,
+role varchar(30),
+foreign key(act_id) references actor(act_id),
+foreign key(mov_id) references movie(mov_id)
+);
+create table movie(
+mov_id int primary key auto_increment,
+mov_title varchar(50),
+mov_year int not null,
+mov_time int not null,
+mov_lang varchar(50) not null,
+mov_dt_rel date,
+mov_rel_country varchar(10)
+)auto_increment=901;
+
+
+
+create table reviewer(
+rev_id int primary key auto_increment,
+rev_name varchar(30)
+)auto_increment=9001;
+
+create table genres(
+gen_id int primary key auto_increment,
+gen_title varchar(20)
+)auto_increment=1001;
+
+create table movie_generes(
+mov_id int not null,
+gen_id int not null,
+foreign key(mov_id) references movie(mov_id),
+foreign key(gen_id) references genres(gen_id)
+);
+
+create table rating(
+mov_id int not null,
+rev_id int not null,
+rev_stars int,
+num_o_ratings int,
+foreign key(mov_id) references movie(mov_id),
+foreign key(rev_id) references reviewer(rev_id) );
+
+show tables;
+
+OUTPUT:
+
+Tables in project_movie_data
+'reviewer'
+'rating'
+'movie_generes'
+'movie_direction'
+'movie_cast'
+'movie'
+'genres'
+'director'
+'actor'
+
+3. Write a query in SQL to list the Horror movies?
+
+select mov_title,gen_title from movie
+inner join movie_generes on movie.mov_id=movie_generes.mov_id
+inner join genres on genres.gen_id=movie_generes.gen_id
+where genres.gen_title='Horror';
+
+4. Write a query in SQL to find the name of all reviewers who have rated 8 or more stars?
+
+select rev_name,rev_stars from reviewer
+inner join rating on reviewer.rev_id=rating.rev_id
+where rev_stars>=8;
+
+5.5. Write a query in SQL to list all the information of the actors who played a role in the movie
+‘Deliverance’
+
+select act_fname,act_lname,act_gender,mov_title from actor
+inner join movie_cast on actor.act_id=movie_cast.act_id
+inner join movie on movie_cast.mov_id=movie.mov_id
+where movie.mov_title='Deliverance';
+
+6. Write a query in SQL to find all the years which produced at least one movie and that
+received a rating of more than 4 stars.
+
+select mov_title,rev_stars,mov_year from movie
+inner join rating on movie.mov_id=rating.mov_id
+where rev_stars>=4;
+
+7. Write a query in SQL to find the name of movies who were directed by ‘David’
+
+select mov_title,dir_fname,dir_lname from movie
+inner join movie_direction on movie.mov_id=movie_direction.mov_id
+inner join director on movie_direction.dir_id=director.dir_id
+where director.dir_fname='David' or director.dir_lname='David';
+
+8. Write a query in SQL to list the first and last names of all the actors who were cast in the
+movie ‘Boogie Nights’, and the roles they played in that production.
+
+select act_fname,act_lname,mov_title,role from actor
+inner join movie_cast on actor.act_id=movie_cast.act_id
+inner join movie on movie_cast.mov_id=movie.mov_id
+where movie.mov_title='Boogie Nights';
+
+
+
+

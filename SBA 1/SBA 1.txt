@@ -1,0 +1,193 @@
+1.Write a program to create a arraylist of double element and add the elements.
+sort the elements in descending order and print it.
+
+package day12assignment;
+
+import java.util.*;
+
+public class DoubleArrayList {
+
+	public static void main(String[] args) {
+		// CREATING ARRAYLIST OF TYPE DOUBLE
+		ArrayList<Double> list=new ArrayList<Double>();
+		list.add(1.38);
+		list.add(5.48);
+		list.add(3.21);
+		list.add(4.21);
+		list.add(10.85);
+		list.add(7.65);
+		list.add(2.36);
+		System.out.println("unsorted array list : "+ list);
+		// sorting arraylist in descending order
+		// using Collections.sort() method
+		// by passing Collections.reverseOrder() as comparator
+		Collections.sort(list,Collections.reverseOrder());
+		// print the sorted arraylist
+		System.out.println("Sorted arraylist in descending order : "+list);
+	}
+
+}
+
+OUTPUT:
+unsorted array list : [1.38, 5.48, 3.21, 4.21, 10.85, 7.65, 2.36]
+Sorted arraylist in descending order : [10.85, 7.65, 5.48, 4.21, 3.21, 2.36, 1.38]
+
+2.2.Create a arraylist of integers and find the sum and average of the entire list.
+
+
+package day12assignment;
+import java.util.*;
+public class AverageArrayList {
+
+	public static void main(String[] args) {
+		ArrayList<Integer> list=new ArrayList<Integer>();
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		list.add(4);
+		list.add(5);
+		list.add(6);
+		list.add(7);
+		list.add(8);
+		list.add(9);
+		double sum=0;
+		for(int i:list) {
+			sum+=i;
+		}
+		double average=sum/list.size();
+		System.out.println("sum "+sum);
+		System.out.println("average = "+average);
+	}
+
+}
+
+OUTPUT:
+sum 45.0
+average = 5.0
+
+3.Create two arraylist of strings to take First_name and Last_name of the
+students,
+and print their whole name.
+package day12assignment;
+
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+
+public class NameArrayList {
+
+	public static void main(String[] args) {
+	ArrayList <String> firstName = new ArrayList <String>();
+	ArrayList <String> lastName = new ArrayList <String>();
+	Scanner sc = new Scanner(System.in);
+	System.out.println("Enter no of students :");
+	int n= sc.nextInt();
+	for(int i=1;i<=n;i++)
+	{
+		System.out.println("Enter Firstname "+i);
+		firstName.add(sc.next());
+		System.out.println("Enter lastname "+i);
+		lastName.add(sc.next());	
+	}
+	for(int i=0;i<n;i++)
+	{
+		System.out.println("Full name :"+(i+1)+" " +firstName.get(i)+" "+lastName.get(i));
+	}
+	}
+}
+
+OUTPUT:
+Enter no of students :
+1
+Enter Firstname 1
+Fathima
+Enter lastname 1
+Althaf
+Full name :1 Fathima Althaf
+
+4.Write a program to check for the occurrence of a particular character in a
+string and display how many times it has occurred.
+note: take the String and the character to be checked as a input from the user.
+
+package day8;
+// write a program to check for occurence of a particular character in a string and display how many times
+// it has occured
+
+import java.util.Scanner;
+import java.lang.*;
+
+public class CharacterOccurenceAssignment {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("enter the string");
+		String s1=sc.next();
+		System.out.println("enter the character you want to check");
+		char search=sc.next().charAt(0);
+		int count=0;
+		for(char ch:s1.toCharArray()) {
+			if(ch==search) {
+				count++;
+			}
+		}
+		System.out.println("no of occurences of character..."+count);
+		
+		
+	}
+
+}
+
+OUTPUT:
+enter the string
+
+FATHIMA
+enter the character you want to check
+A
+no of occurences of character...2
+
+5.Write a program to take an input of a string with multiple words and convert it
+into a string array,
+and check if every element of that array is a Palindrome.
+Note: Palindrome is a word which when reversed also is the same.
+package day8;
+// write a program to take an input of a string with muliple words and convert it to string array and check if every element of
+// that array is palindrome
+
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class StringPalindrome {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("enter your string");
+		String s=sc.nextLine();
+		char[] myArray=s.toCharArray();  // converts string to character array using charArray() method
+		int size=myArray.length;
+		char[] original=Arrays.copyOf(myArray,myArray.length); // copying character array to another character array
+		for(int i=0;i<size/2;i++) {
+			char temp=myArray[i];
+			myArray[i]=myArray[size-i-1];
+			myArray[size-i-1]=temp;
+		}
+		System.out.println("original array "+Arrays.toString(original));
+		System.out.println("reverse array "+Arrays.toString(myArray));
+		if(Arrays.equals(myArray, original)) {
+			System.out.println("entered string is a palindrome");
+		}
+		else {
+			System.out.println("entered string is not palindrome");
+		}
+		
+	}
+
+}
+OUTPUT:
+enter your string
+FATHIMA
+original array [F, A, T, H, I, M, A]
+reverse array [A, M, I, H, T, A, F]
+entered string is not palindrome
+
+
