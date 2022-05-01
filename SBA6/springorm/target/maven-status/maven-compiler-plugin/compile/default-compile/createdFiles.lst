@@ -1,0 +1,7 @@
+com\ust1\spring\springorm\entity\Product.class
+com\ust1\spring\springorm\product\dao\impl\ProductDaoImpl.class
+com\ust1\spring\springorm\product\dao\ProductDao.class
+com\ust1\spring\springorm\product\test\Test.class
+com\ust1\spring\springorm\product\Test.class
+com\ust1\spring\springorm\App.class
+com\ust1\spring\springorm\product\entity\Product.class
